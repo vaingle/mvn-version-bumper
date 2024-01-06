@@ -1,0 +1,17 @@
+name: 'Maven Versioning'
+description: 'Updates Maven project version based on git branch and event triggers'
+inputs:
+  trigger_event:
+    description: 'The event that triggered the workflow (e.g., create, push)'
+    required: true
+  increment:
+    description: 'Type of version increment (major, minor, patch)'
+    required: false
+    default: 'patch'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    TRIGGER_EVENT: ${{ inputs.trigger_event }}
+    INCREMENT: ${{ inputs.increment }}
