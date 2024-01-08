@@ -22,7 +22,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Run Versioning Script
-      uses: <org>/<repo>@<version>
+      uses: <org>/<repo>@<version> #kalyan-mallajosyula/mvn-version-bumper@1.0.0
       with:
         trigger_event: ${{ github.event_name }}
         increment: 'patch'  # Options: 'major', 'minor', 'patch'

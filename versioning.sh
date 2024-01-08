@@ -8,6 +8,16 @@ update_pom_version() {
     mvn versions:commit
 }
 
+# psudo code
+
+# push_to_origin() {
+#     local branch_name=$1
+#     git config --global user.name="Github Action"
+#     git config --global user.email="GithubAction@example.com"
+#     git add ./pom.xml
+#     git push origin $branch_name
+# }
+
 # Function to increment version
 increment_version() {
     local version=$1
