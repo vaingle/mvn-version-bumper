@@ -6,17 +6,18 @@ update_pom_version() {
     echo "Updating pom.xml to version $version"
     mvn versions:set -DnewVersion=$version
     mvn versions:commit
+    push_to_origin
 }
 
-# psudo code
-
-# push_to_origin() {
-#     local branch_name=$1
-#     git config --global user.name="Github Action"
-#     git config --global user.email="GithubAction@example.com"
-#     git add ./pom.xml
-#     git push origin $branch_name
-# }
+# Function to push the changes to current branch
+push_to_origin() {
+    branch_name=$(echo "${{ github.ref }}" | awk -F'/' '{print $3}')
+    git config --global user.name "${{ github.actor }}"
+    git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+    git add ./pom.xml
+    git commit -m "Update version in pom.xml"
+    git push origin $branch_name
+}
 
 # Function to increment version
 increment_version() {
