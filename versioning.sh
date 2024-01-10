@@ -6,14 +6,14 @@ update_pom_version() {
     echo "Updating pom.xml to version $version"
     mvn versions:set -DnewVersion=$version
     mvn versions:commit
-    push_to_origin
+    push_to_origin $2
 }
 
 # Function to push the changes to current branch
 push_to_origin() {
-    branch_name=$(echo "${{ github.ref }}" | awk -F'/' '{print $3}')
-    git config --global user.name "${{ github.actor }}"
-    git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+    local branch_name=$1
+    git config --global user.name "Git Action"
+    git config --global user.email "admin@users.noreply.github.com"
     git add ./pom.xml
     git commit -m "Update version in pom.xml"
     git push origin $branch_name
@@ -52,7 +52,7 @@ branch_name=$(git rev-parse --abbrev-ref HEAD)
 # Main logic
 if [[ $branch_name == release/* ]] && [[ $trigger_event == "create" ]]; then
     version=$(echo $branch_name | sed 's/release\///')
-    update_pom_version $version
+    update_pom_version $version $branch_version
 
 elif [[ $branch_name == release/* ]]; then
     echo "elif 1 triggered"
