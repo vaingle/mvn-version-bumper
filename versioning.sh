@@ -47,8 +47,8 @@ increment_version() {
 }
 
 # Get current branch name
-branch_name=$(git rev-parse --abbrev-ref HEAD)
-
+branch_name=$1
+trigger_event=$2
 # Main logic
 if [[ $branch_name == release/* ]] && [[ $trigger_event == "create" ]]; then
     version=$(echo $branch_name | sed 's/release\///')
