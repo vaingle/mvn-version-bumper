@@ -50,16 +50,16 @@ increment_version() {
 branch_name=$1
 trigger_event=$2
 # Main logic
-if [[ $branch_name == release/* ]] && [[ $trigger_event == "create" ]]; then
+if [[ $branch_name == opsrelease/* ]] && [[ $trigger_event == "create" ]]; then
     version=$(echo $branch_name | sed 's/release\///')
     update_pom_version $version $branch_version
 
-elif [[ $branch_name == release/* ]]; then
+elif [[ $branch_name == opsrelease/* ]]; then
     echo "elif 1 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
     increment_version $version $increment minor
 
-elif [[ $branch_name == "development" ]]; then
+elif [[ $branch_name == "opsdevelopment" ]]; then
     current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
     if [[ $current_version != *"-SNAPSHOT"* ]]; then
         new_version="${current_version}-SNAPSHOT"
@@ -69,5 +69,5 @@ elif [[ $branch_name == "development" ]]; then
     fi
 
  else
-     echo "Branch is neither a release nor development. No action taken."
+     echo "Branch is neither a opsrelease nor opsdevelopment. No action taken."
 fi
