@@ -57,7 +57,7 @@ if [[ $branch_name == opsrelease/* ]] && [[ $trigger_event == "create" ]]; then
 elif [[ $branch_name == opsrelease/* ]]; then
     echo "elif 1 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version $increment
+    increment_version $version $increment major
 
 elif [[ $branch_name == opshotfix/* ]]; then
     echo "elif 2 triggered"
