@@ -64,10 +64,6 @@ elif [[ $branch_name == opshotfix/* ]]; then
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
     increment_version $version $increment patch
 
-elif [[ $branch_name == hotfix/* ]] && [[ $trigger_event == "pull_request" && contains ( github.base_ref, 'opsmain') ]]; then
-    echo "elif 3 triggered"
-    version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version $increment major
 
 elif [[ $branch_name == "opsdevelopment" ]]; then
     current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
