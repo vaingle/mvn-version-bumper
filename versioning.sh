@@ -63,7 +63,7 @@ elif [[ $branch_name == opshotfix/* ]] && [[ $trigger_event == "pull_request" ]]
 elif [[ $branch_name == release/* ]]; then
     echo "elif 1 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version $increment
+    increment_version $version minor
 
 elif [[ $branch_name == "development" ]]; then
     current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
