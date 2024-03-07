@@ -62,7 +62,7 @@ elif [[ $branch_name == opsrelease/* ]]; then
 elif [[ $branch_name == opshotfix/* ]]; then
     echo "elif 2 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version $increment
+    increment_version $version $increment patch
 
 elif [[ $branch_name == "opsdevelopment" ]]; then
     current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
