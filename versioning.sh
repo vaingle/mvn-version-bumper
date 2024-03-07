@@ -54,16 +54,10 @@ if [[ $branch_name == release/* ]] && [[ $trigger_event == "create" ]]; then
     version=$(echo $branch_name | sed 's/release\///')
     update_pom_version $version $branch_version
 
-elif [[ $branch_name == opshotfix/* ]] && [[ $trigger_event == "pull_request" ]]; then #&& contains ( github.base_ref, 'opsmain') ]]; then 
-    version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    new_version="$(increment_version $version $increment)"
-    update_pom_version $new_version $branch_version
-    #increment_version $version $increment
-
 elif [[ $branch_name == release/* ]]; then
     echo "elif 1 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version minor
+    increment_version $version $increment minor
 
 elif [[ $branch_name == "development" ]]; then
     current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
