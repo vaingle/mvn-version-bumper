@@ -64,7 +64,7 @@ elif [[ $branch_name == opshotfix/* ]]; then
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
     increment_version $version $increment patch
     
-elif [[ "${{ github.event.pull_request.base.ref }}" == "main" && "${{ github.event.pull_request.head.ref }}" == "opshotfix*" ]]; then #[[ $branch_name == "main" ]] && [[ $trigger_event == "pull_request" ]]; then
+elif [[ $branch_name == "main" ]] && [[ $trigger_event == "pull_request" ]]; then
     echo "elif 3 triggered"
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
     increment_version $version $increment patch
