@@ -59,10 +59,10 @@ elif [[ $branch_name == opsrelease/* ]]; then
     version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
     increment_version $version $increment minor
 
-elif [[ $branch_name == opshotfix/* ]]; then
-    echo "elif 2 triggered"
-    version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-    increment_version $version $increment patch
+#elif [[ $branch_name == opshotfix/* ]]; then
+#    echo "elif 2 triggered"
+#    version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
+#    increment_version $version $increment patch
     
 elif [[ $branch_name == "main" ]] && [[ $trigger_event == "pull_request" ]]; then
     echo "elif 3 triggered"
