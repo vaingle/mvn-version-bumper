@@ -49,6 +49,7 @@ increment_version() {
 # Get current branch name
 branch_name=$1
 trigger_event=$2
+patch_type=$3
 # Main logic
 if [[ $branch_name == opsrelease/* ]] && [[ $trigger_event == "create" ]]; then
     version=$(echo $branch_name | sed 's/release\///')
@@ -62,7 +63,7 @@ elif [[ $branch_name == opsrelease/* ]]; then
 #elif [[ $branch_name == opshotfix/* ]]; then
 #    echo "elif 2 triggered"
 #    version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/^v//')
-#    increment_version $version $increment patch
+#    increment_version $version $increment
     
 elif [[ $branch_name == "main" ]] && [[ $trigger_event == "pull_request" ]]; then
     echo "elif 3 triggered"
